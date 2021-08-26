@@ -7,7 +7,6 @@
 
 import java.util.*;
 
-import org.graalvm.compiler.word.Word;
 public class Sistema {
 	
 	// -------------------------------------------------------------------------------------------------------
@@ -111,6 +110,11 @@ public class Sistema {
 							pc++;
 							break;
 
+						case SUBI:
+							reg[ir.r1] = reg[ir.r1] - ir.p;
+							pc++;
+							break;
+
 						case JMP: //  PC ← k
 								pc = ir.p;
 						     break;
@@ -136,6 +140,12 @@ public class Sistema {
 							pc++;
 							break;
 
+						
+						case LDD:
+							int value = ir.p;
+							reg[ir.r1] = m[value].p;
+							pc++;
+							break;
 
 						case STOP: // por enquanto, para execucao
 							break;
@@ -208,14 +218,14 @@ public class Sistema {
 	// -------------------------------------------- teste do sistema ,  veja classe de programas
 	public void test1(){
 		Aux aux = new Aux();
-		Word[] p = new Programas().fibonacci10;
+		Word[] p = new Programas().fibonacci;
 		aux.carga(p, vm.m);
 		vm.cpu.setContext(0);
 		System.out.println("---------------------------------- programa carregado ");
-		aux.dump(vm.m, 0, 33);
+		aux.dump(vm.m, 0, 60);
 		vm.cpu.run();
 		System.out.println("---------------------------------- após execucao ");
-		aux.dump(vm.m, 0, 33);
+		aux.dump(vm.m, 0, 60);
 	}
 
 	public void test2(){
@@ -324,12 +334,43 @@ public class Sistema {
 			new Word(Opcode.STOP, -1, -1, -1),    // 9   	stop
 			new Word(Opcode.DATA, -1, -1, -1) };  // 10   ao final o valor do fatorial estará na posição 10 da memória                                    
     
-		public Word[] PA = new Word[]{
-			new Word(Opcode.LDI, 0, -1, 8),
-			new Word(Opcode.JMPIL, -1, 8, -1),
-			new Word(Opcode.JMPIG, _r1, _r2, _p)
+		
+		public Word[] fibonacci = new Word[] {
+
+			// new Word(Opcode.LDI, 0, -1, 5),  //0
+			// new Word(Opcode.STD, 0, -1, 25),
+			// new Word(Opcode.LDD, 1, -1, 25),
+			// new Word(Opcode.LDI, 4, -1, 3),
+			// new Word(Opcode.STOP, -1, -1, -1)
+
+			new Word(Opcode.LDI, 0, -1, 5), //armazena no registrador 0 o valor do parametro que dirá o máximo da sequencia de fibonacci
+            new Word(Opcode.STD, 0, -1, 25),// armazena o valor do registrador 0 na posição 25 da memória 
+            new Word(Opcode.LDD, 1, -1, 25),// guarda no registrador 1 o valor da posição 25 da memória
+            new Word(Opcode.LDI, 7, -1, 8), // armazena no registrador 7 o valor 8 que indica o inicio da lógica do programa
+            new Word(Opcode.JMPIG, 7, 1, -1),// verifica o valor do registrador 1 é positivo, se sim vai para a linha 8
+            new Word(Opcode.LDI, 3, -1, -1),// caso o valor do registrador 1 seja negativo ou zero, armazena -1 no registrador 3 e cai nas duas linhas abaixo
+            new Word(Opcode.STD, 3, -1, 26), // imprime na posição 26 da memória o valor -1 que está no registrador 3
+            new Word(Opcode.STOP, -1, -1, -1), // linha 7 - para o programa
+
+            new Word(Opcode.LDI, 0, -1, 0),//linha 8 - armazena no registrador 0 o valor 0 que indica o primeiro número de fibonacci
+            new Word(Opcode.LDI, 1, -1, 1),// armazena no registrador 1 o valor 1 que indica o segundo número de fibonacci
+            new Word(Opcode.LDI, 2, -1, 27), // posicao para escrita do início da saída d memória
+            new Word(Opcode.LDD, 3, -1, 25), // armazena no registrador 3 o valor da posição 25 da memória
+            new Word(Opcode.LDI, 7, -1, 7), // linha 12 -   armazena no registrador 7 a posição do stop
+
+            new Word(Opcode.STX, 2, 0, -1), //guarda na posição da memória indicada pelo registrador 2 o valor que está no registrador 0
+            new Word(Opcode.ADDI, 2, -1, 1),// guarda no registrador 2 o valor do r1++
+            new Word(Opcode.SUBI, 3, -1, 1),// guarda no registrador 3 o valor de r1-1
+            new Word(Opcode.JMPIE, 7, 3, -1),// verifica se o registrador 3 é zero, se sim pula para o valor que está no registrador 7 que é onde diz onde está o stop
+            new Word(Opcode.STX, 2, 1, -1),// guarda na posição da memória indicada o valor
+            new Word(Opcode.ADDI, 2, -1, 1), //guarda no registrador 2 o valor do r1++
+            new Word(Opcode.SUBI, 3, -1, 1),// guarda no registrador 3 o valor de r1-1
+            new Word(Opcode.JMPIE, 7, 3, -1),// verifica se o registrador 3 é zero
+            new Word(Opcode.ADD, 0, 1, -1), // guarda no registrador 0 o valor do r0+r1
+            new Word(Opcode.ADD, 1, 0, -1),// guarda no registrador 1 o valor de r1+r0
+            new Word(Opcode.JMP, -1, -1, 13)// linha 23  volta pro loop
+
 		};
-	
 	
 		}
 }
