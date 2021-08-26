@@ -287,12 +287,16 @@ public class Sistema {
 			new Word(Opcode.STD, 0, -1, 14), 
 			new Word(Opcode.STOP, -1, -1, -1) };
 
+
+      //Ele escreve nas posições 50 a 59 da memória os primeiros 10
+	  //números da sequência de Fibonacci. Ao final, para ver a resposta, deve ser feito um dump da memória. 
+
 	   public Word[] fibonacci10 = new Word[] { // mesmo que prog exemplo, so que usa r0 no lugar de r8
-			new Word(Opcode.LDI, 1, -1, 0), 
-			new Word(Opcode.STD, 1, -1, 20),    // 20 posicao de memoria onde inicia a serie de fibonacci gerada  
-			new Word(Opcode.LDI, 2, -1, 1),
-			new Word(Opcode.STD, 2, -1, 21),      
-			new Word(Opcode.LDI, 0, -1, 22),       
+			new Word(Opcode.LDI, 1, -1, 0), 	//r1 = 0
+			new Word(Opcode.STD, 1, -1, 20),    // 20 posicao de memoria onde inicia a serie de fibonacci gerada  //r1
+			new Word(Opcode.LDI, 2, -1, 1),		//r2 = 1
+			new Word(Opcode.STD, 2, -1, 21),    //21 posicao de memoria onde inicia a serie de fibonacci gerada   //r2  
+			new Word(Opcode.LDI, 0, -1, 22),    //   
 			new Word(Opcode.LDI, 6, -1, 6),
 			new Word(Opcode.LDI, 7, -1, 30),       
 			new Word(Opcode.LDI, 3, -1, 0), 
@@ -337,13 +341,7 @@ public class Sistema {
 		
 		public Word[] fibonacci = new Word[] {
 
-			// new Word(Opcode.LDI, 0, -1, 5),  //0
-			// new Word(Opcode.STD, 0, -1, 25),
-			// new Word(Opcode.LDD, 1, -1, 25),
-			// new Word(Opcode.LDI, 4, -1, 3),
-			// new Word(Opcode.STOP, -1, -1, -1)
-
-			new Word(Opcode.LDI, 0, -1, 5), //armazena no registrador 0 o valor do parametro que dirá o máximo da sequencia de fibonacci
+			new Word(Opcode.LDI, 0, -1, 10), //armazena no registrador 0 o valor do parametro que dirá o máximo da sequencia de fibonacci
             new Word(Opcode.STD, 0, -1, 25),// armazena o valor do registrador 0 na posição 25 da memória 
             new Word(Opcode.LDD, 1, -1, 25),// guarda no registrador 1 o valor da posição 25 da memória
             new Word(Opcode.LDI, 7, -1, 8), // armazena no registrador 7 o valor 8 que indica o inicio da lógica do programa
@@ -371,7 +369,7 @@ public class Sistema {
             new Word(Opcode.JMP, -1, -1, 13)// linha 23  volta pro loop
 
 		};
-	
+
 		}
 }
 
