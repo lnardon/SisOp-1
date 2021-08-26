@@ -370,6 +370,51 @@ public class Sistema {
 
 		};
 
+		public Word[] programaC = new Word[] {
+			new Word(Opcode.DATA,5,-1,43),
+			new Word(Opcode.DATA,2,-1,44),
+			new Word(Opcode.DATA,8,-1,45),
+			new Word(Opcode.DATA,4,-1,46),
+			new Word(Opcode.DATA,1,-1,47),
+			new Word(Opcode.DATA,6,-1,48),
+			new Word(Opcode.LDD,1,-1,43),
+			new Word(Opcode.LDI,2,-1,0),
+			new Word(Opcode.LDI,3,-1,0),
+			new Word(Opcode.LDI,5,-1,0),
+			new Word(Opcode.ADD,5,2,0),
+			new Word(Opcode.SUB,5,1,0),
+			new Word(Opcode.JMPIGM,5,-1,41),
+			new Word(Opcode.JMPIEM,5,-1,41),
+			new Word(Opcode.ADDI,2,-1,1),
+			new Word(Opcode.LDI,3,-1,0),
+			new Word(Opcode.LDI,5,-1,0),
+			new Word(Opcode.ADD,5,3,0),
+			new Word(Opcode.ADDI,5,-1,1),
+			new Word(Opcode.SUB,5,1,0),
+			new Word(Opcode.JMPIEM, 5,-1,9),
+			new Word(Opcode.JMPIGM, 5,-1,9),
+			new Word(Opcode.LDI, 4,-1,44),
+			new Word(Opcode.ADD, 4,3,0),
+			new Word(Opcode.LDI, 5,-1,1),
+			new Word(Opcode.ADD, 5,4,0),
+			new Word(Opcode.LDX, 4,4,-1),
+			new Word(Opcode.LDX, 5,5,-1),
+			new Word(Opcode.ADDI,3,-1,1),
+			new Word(Opcode.LDI, 6,-1,0),
+			new Word(Opcode.ADD, 6,5,0),
+			new Word(Opcode.SUB, 6,4,1),
+			new Word(Opcode.JMPILM,6,-1,34),
+			new Word(Opcode.JMP, -1,-1,16),
+			new Word(Opcode.SWAP,5,4,-1),
+			new Word(Opcode.LDI, 6,-1,43),
+			new Word(Opcode.ADD, 6,3,-1),
+			new Word(Opcode.STX, 6,4,-1),
+			new Word(Opcode.ADDI,6,-1,1),
+			new Word(Opcode.STX, 6,5,-1),
+			new Word(Opcode.JMP, -1,-1,16),
+			new Word(Opcode.STOP,-1,-1,-1),
+		};
+
 		}
 }
 
